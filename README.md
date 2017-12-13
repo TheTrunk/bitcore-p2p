@@ -9,7 +9,7 @@ See [the main bitcore repo](https://github.com/bitpay/bitcore) for more informat
 ## Getting Started
 
 ```sh
-git clone https://github.com/TheTrunk/bitcore-p2p-hush#master
+git clone https://github.com/TheTrunk/bitcore-p2p-hush.git
 cd bitcore-p2p-hush
 npm install 
 ```
