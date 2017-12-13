@@ -6,7 +6,7 @@ var chai = require('chai');
 var should = chai.should();
 var sinon = require('sinon');
 
-var bitcore = require('bitcore-lib');
+var bitcore = require('bitcore-lib-hush');
 var _ = bitcore.deps._;
 var Random = bitcore.crypto.Random;
 var BN = bitcore.crypto.BN;
@@ -20,26 +20,26 @@ var Inventory = p2p.Inventory;
 var Block = bitcore.Block;
 var Transaction = bitcore.Transaction;
 
-// config 
+// config TODO2
 var network = process.env.NETWORK === 'testnet' ? Networks.testnet : Networks.livenet;
 var messages = new Messages({
   network: network
 });
 var blockHash = {
-  'livenet': '000000000000000013413cf2536b491bf0988f52e90c476ffeb701c8bfdb1db9',
-  'testnet': '0000000058cc069d964711cd25083c0a709f4df2b34c8ff9302ce71fe5b45786'
+  'livenet': '4becbd609a75f11965a7d4db57b4929a9fd98ea90661e42f5443f636a1e68e2a', //blockhash 1
+  'testnet': '04d062773dbf4fa4bf5051991e4e7041374c01f1660cea9dbb15560ada7b6bd5'
 };
 var stopBlock = {
-  'livenet': '00000000000000000b539ef570128acb953af3dbcfc19dd8e6066949672311a1',
-  'testnet': '00000000d0bc4271bcefaa7eb25000e345910ba16b91eb375cd944b68624de9f'
+  'livenet': '0126dce09c4c9250e14727b0ba40bd6253eb74dfc6da60b37412da86fb0d836b', //blockhash 100
+  'testnet': '07dc7d075aa9aa9020b5dcb39ffe763d2a1ce575af4644971ebcb96ac5429f61'
 };
 var txHash = {
-  'livenet': '22231e8219a0617a0ded618b5dc713fdf9b0db8ebd5bb3322d3011a703119d3b',
+  'livenet': '22231e8219a0617a0ded618b5dc713fdf9b0db8ebd5bb3322d3011a703119d3b', //unmodified
   'testnet': '22231e8219a0617a0ded618b5dc713fdf9b0db8ebd5bb3322d3011a703119d3b'
 };
 
-// These tests require a running bitcoind instance
-describe('Integration with ' + network.name + ' bitcoind', function() {
+// These tests require a running hushd instance
+describe('Integration with ' + network.name + ' hushd', function() {
 
   this.timeout(15000);
   var opts = {
@@ -146,7 +146,7 @@ describe('Integration with ' + network.name + ' bitcoind', function() {
       peer.sendMessage(message);
     });
   });
-  var fakeHash = 'e2dfb8afe1575bfacae1a0b4afc49af7ddda69285857267bae0e22be15f74a3a';
+  var fakeHash = 'e2dfb8afe1575bfacae1a0b4afc49af7ddda69285857267bae0e22be15f74a3a'; //unmodified
   it('handles request tx data not found', function(cb) {
     connect(function(peer) {
       var expected = messages.NotFound.forTransaction(fakeHash);
